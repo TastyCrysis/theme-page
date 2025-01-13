@@ -7,6 +7,14 @@ import "./App.css";
 function App() {
   const [colors, setColors] = useState(initialColors);
 
+  const handleEdit = (updatedColor) => {
+    setColors((prevColors) =>
+      prevColors.map((color) =>
+        color.id === updatedColor.id ? updatedColor : color
+      )
+    );
+  };
+
   function handleSubmit(data) {
     setColors((prevColors) => [data, ...prevColors]);
   }
@@ -21,7 +29,12 @@ function App() {
       <ColorForm onSubmitColor={handleSubmit} />
       {colors.map((color) => {
         return (
-          <Color key={color.id} color={color} onDelete={handleDeleteColor} />
+          <Color
+            key={color.id}
+            color={color}
+            onDelete={handleDeleteColor}
+            onEdit={handleEdit}
+          />
         );
       })}
     </>

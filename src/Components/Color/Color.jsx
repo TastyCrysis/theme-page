@@ -1,51 +1,57 @@
 import { useState } from "react";
+import EditForm from "../EditForm/EditForm";
+import ConfirmForm from "../ConfirmForm/ConfirmForm";
 import "./Color.css";
 
-export default function Color({ color, onDelete }) {
+export default function Color({ color, onDelete, onEdit }) {
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
+
+  const [currentColor, setCurrentColor] = useState(color);
+
+  const handleEdit = (updatedColor) => {
+    setCurrentColor(updatedColor);
+    if (onEdit) {
+      onEdit(updatedColor);
+    }
+  };
 
   const handleDelete = () => {
     setShowConfirmation(true);
-  };
-
-  const handleConfirm = () => {
-    onDelete(color.id);
-    setShowConfirmation(false);
-  };
-
-  const handleCancel = () => {
-    setShowConfirmation(false);
   };
 
   return (
     <div
       className="color-card"
       style={{
-        background: color.hex,
-        color: color.contrastText,
+        background: currentColor.hex,
+        color: currentColor.contrastText,
       }}
     >
-      <h3 className="color-card-headline">{color.hex}</h3>
-      <h4>{color.role}</h4>
-      <p>contrast: {color.contrastText}</p>
-      {showConfirmation ? (
-        <div className="confirmation">
-          <p className="color-card-highlight">
-            Are you sure you want to delete this color?
-          </p>
-          <div className="confirmation-buttons">
-            <button className="delete-button-confirm" onClick={handleConfirm}>
-              Yes
-            </button>
-            <button className="delete-button-cancel" onClick={handleCancel}>
-              No
-            </button>
-          </div>
-        </div>
+      <h3 className="color-card-headline">{currentColor.hex}</h3>
+      <h4>{currentColor.role}</h4>
+      <p>contrast: {currentColor.contrastText}</p>
+      {showEdit ? (
+        <EditForm
+          color={currentColor}
+          setShowEdit={setShowEdit}
+          onSubmit={handleEdit}
+        />
+      ) : showConfirmation ? (
+        <ConfirmForm
+          color={currentColor}
+          onDelete={onDelete}
+          setShowConfirmation={setShowConfirmation}
+        />
       ) : (
-        <button className="delete-button" onClick={handleDelete}>
-          Delete
-        </button>
+        <div className="buttons">
+          <button className="edit-button" onClick={() => setShowEdit(true)}>
+            Edit
+          </button>
+          <button className="delete-button" onClick={handleDelete}>
+            Delete
+          </button>
+        </div>
       )}
     </div>
   );
