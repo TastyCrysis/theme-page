@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 
-export default function ColorInput({ id, defaultValue }) {
+export default function ColorInput({id, defaultValue}) {
   const [inputValue, setInputValue] = useState(defaultValue);
 
   useEffect(() => {
