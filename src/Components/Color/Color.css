@@ -24,6 +24,10 @@
   margin: 10px 0;
 }
 
+.color-info {
+  margin: 0 0 0 7px;
+}
+
 .delete-button {
   display: inline;
   padding: 2px 6px;
@@ -127,4 +131,15 @@
   color: black;
   font-weight: bold;
   margin-left: 15px;
+}
+
+.contrast-checker {
+  background-color: black;
+  padding: 8px;
+  border-radius: 5px;
+  color: white;
+  margin: 0 0 5px 0;
+  width: fit-content;
+  display: inline-block;
+  border: 1px solid white;
 }
