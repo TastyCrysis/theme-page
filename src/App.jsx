@@ -22,7 +22,10 @@ function App() {
   }
 
   function handleDeleteColor(id) {
-    setColors((prevColors) => prevColors.filter((color) => color.id !== id));
+    setColors((prevColors) => {
+      const updatedColors = prevColors.filter((color) => color.id !== id);
+      return updatedColors;
+    });
   }
 
   function handleReset() {
@@ -34,14 +37,18 @@ function App() {
       <h1>Theme Creator</h1>
       <button onClick={handleReset}>Reset to Default Colors</button>
       <ColorForm onSubmitColor={handleSubmit} />
-      {colors.map((color) => (
-        <Color
-          key={color.id}
-          color={color}
-          onDelete={() => handleDeleteColor(color.id)}
-          onEdit={handleEdit}
-        />
-      ))}
+      {colors.length === 0 ? (
+        <p className="no-color">No colors available. Please add a new color.</p>
+      ) : (
+        colors.map((color) => (
+          <Color
+            key={color.id}
+            color={color}
+            onDelete={() => handleDeleteColor(color.id)}
+            onEdit={handleEdit}
+          />
+        ))
+      )}
     </>
   );
 }
