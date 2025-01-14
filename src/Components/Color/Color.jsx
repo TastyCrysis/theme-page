@@ -3,11 +3,10 @@ import EditForm from "../EditForm/EditForm";
 import ConfirmForm from "../ConfirmForm/ConfirmForm";
 import "./Color.css";
 import useLocalStorageState from "use-local-storage-state";
-
+import CopyToClipboard from "../CopyToClipboard/CopyToClipboard";
 export default function Color({ color, onDelete, onEdit }) {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
-
   const [currentColor, setCurrentColor] = useLocalStorageState(color.id, {
     defaultValue: color,
   });
@@ -31,7 +30,10 @@ export default function Color({ color, onDelete, onEdit }) {
         color: currentColor.contrastText,
       }}
     >
-      <h3 className="color-card-headline">{currentColor.hex}</h3>
+      <div className="color-header">
+        <h3 className="color-card-headline">{currentColor.hex}</h3>
+        <CopyToClipboard text={currentColor.hex} />
+      </div>
       <h4>{currentColor.role}</h4>
       <p>contrast: {currentColor.contrastText}</p>
       {showEdit ? (

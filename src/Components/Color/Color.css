@@ -3,6 +3,11 @@
   padding: 5px;
 }
 
+.color-header {
+  display: flex;
+  align-items: center;
+}
+
 .color-card-headline {
   display: inline;
   padding: 2px 6px;
@@ -24,7 +29,7 @@
   padding: 2px 6px;
   background: black;
   color: white;
-  border: none;
+  border: 1px solid white;
   border-radius: 5px;
   cursor: pointer;
   transition: opacity 0.2s;
@@ -39,7 +44,7 @@
   padding: 2px 6px;
   background: black;
   color: white;
-  border: none;
+  border: 1px solid white;
   border-radius: 5px;
   cursor: pointer;
   transition: opacity 0.2s;
@@ -50,7 +55,7 @@
   padding: 2px 6px;
   background: black;
   color: white;
-  border: none;
+  border: 1px solid white;
   border-radius: 5px;
   cursor: pointer;
   transition: opacity 0.2s;
@@ -79,6 +84,7 @@
   padding: 2px 6px;
   background: black;
   color: white;
+  border: 1px solid white;
 }
 
 .edit-form {
@@ -98,4 +104,21 @@
   display: flex;
   gap: 15px;
   justify-content: flex-end;
+}
+
+.copy-button {
+  display: inline;
+  padding: 2px 6px;
+  background: black;
+  color: white;
+  border: 1px solid white;
+  margin-left: 10px;
+}
+
+.copy-confirmation {
+  padding: 2px 6px;
+  background: black;
+  color: white;
+  border: 1px solid white;
+  margin-left: 10px;
 }
