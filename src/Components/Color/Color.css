@@ -132,14 +132,3 @@
   font-weight: bold;
   margin-left: 15px;
 }
-
-.contrast-checker {
-  background-color: black;
-  padding: 8px;
-  border-radius: 5px;
-  color: white;
-  margin: 0 0 5px 0;
-  width: fit-content;
-  display: inline-block;
-  border: 1px solid white;
-}
