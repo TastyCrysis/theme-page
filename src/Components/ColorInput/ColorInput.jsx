@@ -1,6 +1,6 @@
-import {useState, useEffect} from "react";
+import { useEffect, useState } from "react";
 
-export default function ColorInput({id, defaultValue}) {
+export default function ColorInput({ id, defaultValue }) {
   const [inputValue, setInputValue] = useState(defaultValue);
 
   useEffect(() => {
@@ -21,7 +21,12 @@ export default function ColorInput({id, defaultValue}) {
         value={inputValue}
         onChange={handleInputValue}
       />
-      <input type="color" value={inputValue} onChange={handleInputValue} />
+      <input
+        type="color"
+        value={inputValue}
+        onChange={handleInputValue}
+        aria-label={`Color picker for ${id}`}
+      />
     </>
   );
 }

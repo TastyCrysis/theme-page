@@ -2,12 +2,15 @@ import { useState } from "react";
 import EditForm from "../EditForm/EditForm";
 import ConfirmForm from "../ConfirmForm/ConfirmForm";
 import "./Color.css";
+import useLocalStorageState from "use-local-storage-state";
 
 export default function Color({ color, onDelete, onEdit }) {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
 
-  const [currentColor, setCurrentColor] = useState(color);
+  const [currentColor, setCurrentColor] = useLocalStorageState(color.id, {
+    defaultValue: color,
+  });
 
   const handleEdit = (updatedColor) => {
     setCurrentColor(updatedColor);
