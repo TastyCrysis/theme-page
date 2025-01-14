@@ -1,12 +1,15 @@
 import { useState } from "react";
+import ContrastChecker from "../ContrastChecker/ContrastChecker";
 import EditForm from "../EditForm/EditForm";
 import ConfirmForm from "../ConfirmForm/ConfirmForm";
 import "./Color.css";
 import useLocalStorageState from "use-local-storage-state";
 import CopyToClipboard from "../CopyToClipboard/CopyToClipboard";
+
 export default function Color({ color, onDelete, onEdit }) {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
+  const [accessibilityScore, setAccessibilityScore] = useState(null);
   const [currentColor, setCurrentColor] = useLocalStorageState(color.id, {
     defaultValue: color,
   });
@@ -34,8 +37,21 @@ export default function Color({ color, onDelete, onEdit }) {
         <h3 className="color-card-headline">{currentColor.hex}</h3>
         <CopyToClipboard text={currentColor.hex} />
       </div>
-      <h4>{currentColor.role}</h4>
-      <p>contrast: {currentColor.contrastText}</p>
+      <div className="color-info">
+        <h4>{currentColor.role}</h4>
+        <p>contrast: {currentColor.contrastText}</p>
+      </div>
+      <div className="contrast-checker">
+        <p className={`result ${accessibilityScore?.className || ""}`}>
+          {accessibilityScore
+            ? accessibilityScore.score
+            : "Overall Contrast Score: Loading..."}
+        </p>
+        <ContrastChecker
+          color={currentColor}
+          onResult={setAccessibilityScore}
+        />
+      </div>
       {showEdit ? (
         <EditForm
           color={currentColor}

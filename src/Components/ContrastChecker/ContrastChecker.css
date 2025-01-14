@@ -1,0 +1,22 @@
+.contrast-checker {
+  background-color: black;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+}
+
+.contrast-checker .result {
+  font-weight: bold;
+}
+
+.contrast-checker .result.high-contrast {
+  color: #00ff00;
+}
+
+.contrast-checker .result.medium-contrast {
+  color: yellow;
+}
+
+.contrast-checker .result.low-contrast {
+  color: red;
+}
