@@ -1,10 +1,10 @@
 import ColorInput from "../ColorInput/ColorInput";
 import "./ColorForm.css";
-import {nanoid} from "nanoid";
+import { nanoid } from "nanoid";
 
 export default function ColorForm({
   onSubmitColor,
-  initialData = {role: "some color", hex: "#ff4a11", contrastText: "#ffffff"},
+  initialData = { role: "some color", hex: "#ff4a11", contrastText: "#ffffff" },
 }) {
   function handleSubmit(event) {
     event.preventDefault();
@@ -12,6 +12,7 @@ export default function ColorForm({
     const data = Object.fromEntries(formData);
     data.id = nanoid();
     onSubmitColor(data);
+    event.target.reset();
   }
 
   return (
