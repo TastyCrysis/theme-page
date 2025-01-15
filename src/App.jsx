@@ -22,10 +22,7 @@ function App() {
   }
 
   function handleDeleteColor(id) {
-    setColors((prevColors) => {
-      const updatedColors = prevColors.filter((color) => color.id !== id);
-      return updatedColors;
-    });
+    setColors((prevColors) => prevColors.filter((color) => color.id !== id));
   }
 
   function handleReset() {
