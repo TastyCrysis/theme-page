@@ -1,48 +1,55 @@
-import { initialColors } from "./lib/colors";
+import { useTheme } from "./hooks/useTheme";
+import { useColor } from "./hooks/useColor";
 import Color from "./Components/Color/Color";
 import ColorForm from "./Components/ColorForm/ColorForm";
+import Themes from "./Components/Themes/Themes";
 import "./App.css";
-import useLocalStorageState from "use-local-storage-state";
 
 function App() {
-  const [colors, setColors] = useLocalStorageState("colors", {
-    defaultValue: initialColors,
-  });
+  const {
+    themes,
+    setThemes,
+    currentTheme,
+    setCurrentTheme,
+    handleAddTheme,
+    handleDeleteTheme,
+    showDeleteConfirmation,
+    confirmDelete,
+    cancelDelete,
+  } = useTheme();
 
-  const handleEdit = (updatedColor) => {
-    setColors((prevColors) =>
-      prevColors.map((color) =>
-        color.id === updatedColor.id ? updatedColor : color
-      )
-    );
-  };
-
-  function handleSubmit(data) {
-    setColors((prevColors) => [data, ...prevColors]);
-  }
-
-  function handleDeleteColor(id) {
-    setColors((prevColors) => prevColors.filter((color) => color.id !== id));
-  }
-
-  function handleReset() {
-    setColors(initialColors);
-  }
+  const { handleEdit, handleSubmit, handleDeleteColor } = useColor(
+    setThemes,
+    currentTheme
+  );
 
   return (
     <>
       <h1>Theme Creator</h1>
-      <button onClick={handleReset}>Reset to Default Colors</button>
-      <ColorForm onSubmitColor={handleSubmit} />
-      {colors.length === 0 ? (
+      <Themes
+        currentTheme={currentTheme}
+        themes={themes}
+        onThemeChange={setCurrentTheme}
+        onAddTheme={handleAddTheme}
+        onDeleteTheme={handleDeleteTheme}
+        showDeleteConfirmation={showDeleteConfirmation}
+        confirmDelete={confirmDelete}
+        cancelDelete={cancelDelete}
+      />
+      <ColorForm
+        onSubmitColor={handleSubmit}
+        disabled={currentTheme === "Default"}
+      />
+      {themes[currentTheme].length === 0 ? (
         <p className="no-color">No colors available. Please add a new color.</p>
       ) : (
-        colors.map((color) => (
+        themes[currentTheme].map((color) => (
           <Color
             key={color.id}
             color={color}
             onDelete={() => handleDeleteColor(color.id)}
             onEdit={handleEdit}
+            disabled={currentTheme === "Default"}
           />
         ))
       )}

@@ -6,7 +6,7 @@ import "./Color.css";
 import useLocalStorageState from "use-local-storage-state";
 import CopyToClipboard from "../CopyToClipboard/CopyToClipboard";
 
-export default function Color({ color, onDelete, onEdit }) {
+export default function Color({ color, onDelete, onEdit, disabled }) {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [accessibilityScore, setAccessibilityScore] = useState(null);
@@ -57,19 +57,29 @@ export default function Color({ color, onDelete, onEdit }) {
           color={currentColor}
           setShowEdit={setShowEdit}
           onSubmit={handleEdit}
+          disabled={disabled}
         />
       ) : showConfirmation ? (
         <ConfirmForm
           color={currentColor}
           onDelete={onDelete}
           setShowConfirmation={setShowConfirmation}
+          disabled={disabled}
         />
       ) : (
         <div className="buttons">
-          <button className="edit-button" onClick={() => setShowEdit(true)}>
+          <button
+            className="edit-button"
+            onClick={() => setShowEdit(true)}
+            disabled={disabled}
+          >
             Edit
           </button>
-          <button className="delete-button" onClick={handleDelete}>
+          <button
+            className="delete-button"
+            onClick={handleDelete}
+            disabled={disabled}
+          >
             Delete
           </button>
         </div>

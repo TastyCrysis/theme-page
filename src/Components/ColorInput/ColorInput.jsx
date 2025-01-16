@@ -15,6 +15,7 @@ export default function ColorInput({ id, defaultValue }) {
   return (
     <>
       <input
+        className="color-form-text-input"
         type="text"
         id={id}
         name={id}
@@ -22,6 +23,7 @@ export default function ColorInput({ id, defaultValue }) {
         onChange={handleInputValue}
       />
       <input
+        className="color-form-color-input"
         type="color"
         value={inputValue}
         onChange={handleInputValue}
